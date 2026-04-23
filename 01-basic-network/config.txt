@@ -1,0 +1,39 @@
+Skenario 1:
+- Satu Network ID
+PC 1:
+IP   : 192.168.10.10
+Mask : 255.255.255.0
+
+PC 2:
+IP   : 192.168.10.20
+Mask : 255.255.255.0
+
+Skenario 2:
+- Beda Network ID
+PC 1:
+IP   : 192.168.10.10
+Mask : 255.255.255.0
+
+PC 2:
+IP   : 192.168.11.20
+Mask : 255.255.255.0
+
+Skenario 3:
+- Beda Network ID tapi harus koneksi
+PC 1:
+IP      : 192.168.10.10
+Mask    : 255.255.255.0
+Gateway : 192.168.10.100
+
+PC 2:
+IP      : 192.168.11.20
+Mask    : 255.255.255.0
+Gateway : 192.168.11.100
+
+Router-PC1:
+IP   : 192.168.10.100
+Mask : 255.255.255.0
+
+Router-PC2:
+IP   : 192.168.11.100
+Mask : 255.255.255.0
