@@ -25,6 +25,9 @@ Setiap folder berisi 1 lab dengan isi:
   - Pengujian ping (success case).
   - Pengujian komunikasi antar device dalam network yang berbeda.
   - Analisis kegagalan koneksi tanpa router.
+- **02-troubleshooting-basic**
+  - Analisis problem yang terjadi.
+  - Solve problem sesuai dengan problem yang terjadi.
   
 ## Fokus Pembelajaran
 Tidak hanya “bisa jalan”, tapi memahami:
@@ -35,6 +38,7 @@ Tidak hanya “bisa jalan”, tapi memahami:
 ## Roadmap Singkat
 - Basic Networking ✔
 - Subnetting ✔
+- Troubleshooting ✔
 
 ## Catatan
 Semua lab dibuat sebagai bagian dari proses belajar. Fokus utama adalah konsistensi dan pemahaman konsep, bukan kompleksitas.
