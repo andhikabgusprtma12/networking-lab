@@ -1,44 +1,26 @@
-# Networking Lab
+# Network Lab
 
-Repository ini berisi kumpulan lab dan eksperimen saya dalam mempelajari dasar-dasar networking, dengan fokus pada pemahaman konsep dan troubleshooting sebagai persiapan menuju role Network Operations Center (NOC).
+A personal networking portfolio built using Cisco Packet Tracer.
+Documenting my learning journey from basic networking to more
+advanced configurations.
 
-## Tujuan
-- Memahami fundamental networking (IP Address, Subnet, Routing).
-- Melatih cara berpikir troubleshooting.
-- Membangun portfolio yang berbasis real praktik.
-- Menyiapkan skill dasar untuk masuk ke dunia kerja IT.
+## Skills
+- Basic Network Configuration
+- Troubleshooting
+- NAT (Network Address Translation)
 
-## Tools yang Digunakan
+## Tools
 - Cisco Packet Tracer
-- Coming Soon
+- Linux (Basic)
 
-## Struktur Project
-Setiap folder berisi 1 lab dengan isi:
-- `lab-file.pkt` → file simulasi Cisco.
-- `images` → gambaran jaringan.
-- `config.txt` → konfigurasi IP / network.
-- `notes.md` → penjelasan, analisis, dan hasil testing.
+## Structure
+- `progress/` - Step by step learning documentation
+- `projects/` - Main projects
+- `side-task/` - Additional skills
 
-## Daftar Lab
-- **01-basic-network**
-  - Komunikasi antar device dalam satu network.
-  - Pengujian ping (success case).
-  - Pengujian komunikasi antar device dalam network yang berbeda.
-  - Analisis kegagalan koneksi tanpa router.
-- **02-troubleshooting-basic**
-  - Analisis problem yang terjadi.
-  - Solve problem sesuai dengan problem yang terjadi.
-  
-## Fokus Pembelajaran
-Tidak hanya “bisa jalan”, tapi memahami:
-- Kenapa koneksi berhasil.
-- Kenapa koneksi gagal.
-- Bagaimana cara menganalisis masalah.
-
-## Roadmap Singkat
-- Basic Networking ✔
-- Subnetting ✔
-- Troubleshooting ✔
-
-## Catatan
-Semua lab dibuat sebagai bagian dari proses belajar. Fokus utama adalah konsistensi dan pemahaman konsep, bukan kompleksitas.
+## Progress
+| No | Topic | Status |
+|----|-------|--------|
+| 01 | Network Basic | ✅ Done |
+| 02 | Troubleshooting Basic | ✅ Done |
+| 03 | NAT | ✅ Done |

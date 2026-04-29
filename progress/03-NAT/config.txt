@@ -1,0 +1,66 @@
+! ============================================================
+! TOPOLOGY : Small Network with NAT
+! DATE     : 29 - 04 - 2026
+! TOOLS    : Cisco Packet Tracer
+! ============================================================
+
+! ============================================================
+! R1 CONFIGURATION
+! ============================================================
+
+! Interface to SW1 (static)
+interface fa0/0
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+
+! Interface to SW2 (dhcp)
+interface fa0/1
+ ip address 192.168.20.1 255.255.255.0
+ no shutdown
+ip dhcp pool gw
+default-router 192.168.20.1
+network 192.168.20.0 255.255.255.0
+
+! Interface to SW3
+interface fa6/0
+ ip address 10.10.10.1 255.255.255.0
+ no shutdown
+
+! ACL for NAT
+access-list 1 permit 192.168.10.0 0.0.0.255
+access-list 1 permit 192.168.20.0 0.0.0.255
+
+! NAT Overload (PAT)
+ip nat inside source list 1 interface fa6/0 overload
+
+! Default route to Server
+ip route 0.0.0.0 0.0.0.0 10.10.10.2
+
+! Interface to SW1 (NAT Inside)
+interface fa0/0
+ ip nat inside
+ no shutdown
+
+! Interface to SW2 (NAT Inside)
+interface fa1/0
+ ip nat inside
+ no shutdown
+
+! Interface to SW3 (NAT Outside)
+interface fa6/0
+ ip nat outside
+ no shutdown
+
+! ============================================================
+! R2 CONFIGURATION
+! ============================================================
+
+! Interface to SW3
+interface fa0/0
+ ip address 10.10.10.2 255.255.255.0
+ no shutdown
+
+! Interface to Server
+interface fa1/0
+ ip address 8.8.8.1 255.255.255.0
+ no shutdown

@@ -1,0 +1,31 @@
+! =====================================================================
+! TOPOLOGY : Small Network with Configuration Anomalies
+! DATE     : 25 - 04 - 2026
+! TOOLS    : Cisco Packet Tracer
+! =====================================================================
+
+! ============================================================
+! Subnet Mask Misconfiguration Scenarios
+! ============================================================
+
+! PC0
+ ip : 192.168.1.80
+ mask : 255.255.255.0
+
+! PC1
+ ip : 192.168.1.40
+ mask : 255.255.255.192
+
+! ============================================================
+! Administratively Down Interface Scenario
+! ============================================================
+
+! Interface to SW1 (shutdown)
+Inteface fa0/0
+ ip address 192.168.10.1 255.255.255.0
+ shutdown
+
+! Interface to SW1
+Interface fa1/0
+ ip address 192.168.20.1 255.255.255.0
+ no shutdown
