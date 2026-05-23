@@ -1,0 +1,44 @@
+! ============================================================
+! TOPOLOGY : Small Network with Services
+! DATE     : 12 - 05 - 2026
+! TOOLS    : Cisco Packet Tracer
+! ============================================================
+
+! ============================================================
+! Web Server CONFIGURATION
+! ============================================================
+
+! R1 to Server-S
+interface fa7/0
+ ip add 12.12.12.1 255.255.255.0
+ no sh
+ ex
+
+! Services HTTP
+Tab Services
+ on HTTP and HTTPS
+ delete all file except index.html
+ edit index.html:
+  <h1>
+  WELCOME
+  <h1>
+ save
+
+! ============================================================
+! SSH Server CONFIGURATION
+! ============================================================
+
+! R1 to SSH Configuration
+hostname ANDHIKA
+ ip domain-name andhika-service.com
+ crypto key generate rsa
+ 1024
+ username admin secret password123
+ line vty 0 4
+ transport input ssh
+ login local
+ ip ssh version 2
+
+! PC1 to SSH
+ssh -l admin 12.12.12.1
+ password123

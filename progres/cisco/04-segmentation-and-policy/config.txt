@@ -1,0 +1,131 @@
+! ============================================================
+! TOPOLOGY : Small Network with VLAN + ACL
+! DATE     : 11 - 05 - 2026
+! TOOLS    : Cisco Packet Tracer
+! ============================================================
+
+! ============================================================
+! SW1 CONFIGURATION
+! ============================================================
+
+! VLAN to PC1
+vlan 10
+ name A
+ ex
+
+! VLAN to PC2
+vlan 20
+ name B
+ ex
+
+! Switchport to VLAN 10
+interface fa0/1
+ switchport mode access
+ switchport access vlan 10
+ ex
+
+! Switchport to VLAN 20
+interface fa1/1
+ switchport mode access
+ switchport access vlan 20
+ ex
+
+! Trunk Port to R1
+interface fa2/1
+ switchport mode trunk
+ ex
+
+! ============================================================
+! SW2 CONFIGURATION
+! ============================================================
+
+! VLAN to PC3
+vlan 30
+ name C
+ ex
+
+! VLAN to PC4
+vlan 40
+ name D
+ ex
+
+! Switchport to VLAN 30
+interface fa0/1
+ switchport mode access
+ switchport access vlan 30
+ ex
+
+! Switchport to VLAN 40
+interface fa1/1
+ switchport mode access
+ switchport access vlan 40
+ ex
+
+! Trunk Port to R1
+interface fa2/1
+ switchport mode trunk
+ ex
+
+! ============================================================
+! R1 CONFIGURATION
+! ============================================================
+
+! R1 to SW1
+interface fa0/0
+ no sh
+ ex
+
+! R1 to SW2
+interface fa1/0
+ no sh
+ ex
+
+! R1 to Server
+interface fa6/0
+ ip add 8.8.8.1 255.255.255.0
+ no sh
+ ex
+
+! Subinterface to VLAN 10
+interface fa0/0.10
+ encapsulation dot1q 10
+ ip add 192.168.10.1 255.255.255.0
+ ex
+
+! Subinterface to VLAN 20
+interface fa0/0.20
+ encapsulation dot1q 20
+ ip add 192.168.20.1 255.255.255.0
+ ex
+
+! Subinterface to VLAN 30
+interface fa1/0.30
+ encapsulation dot1q 30
+ ip add 192.168.30.1 255.255.255.0
+ ex
+
+! Subinterface to VLAN 40
+interface fa1/0.40
+ encapsulation dot1q 40
+ ip add 192.168.40.1 255.255.255.0
+ ex
+
+! DHCP to PC4
+ip dhcp excluded-address 192.168.40.1
+ ip dhcp pool D
+ network 192.168.40.0 255.255.255.0
+ default-router 192.168.40.1
+ dns-server 8.8.8.8
+
+! ACL
+ip access-list extended POLICY
+ permit ip host 192.168.40.2 host 8.8.8.8
+ deny ip host 192.168.40.2 any
+ permit ip any any
+ ex
+
+! ACL to VLAN 40
+interface fa1/0.40
+ ip access-group POLICY in
+ end
+ write
