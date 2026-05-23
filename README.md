@@ -8,6 +8,12 @@ advanced configurations.
 - Basic Network Configuration
 - Troubleshooting
 - NAT (Network Address Translation)
+- DHCP & Static
+- VLAN
+- ACL
+- DNS Server
+- SSH Server
+- Web Server
 
 ## Tools
 - Cisco Packet Tracer
@@ -24,3 +30,5 @@ advanced configurations.
 | 01 | Network Basic | ✅ Done |
 | 02 | Troubleshooting Basic | ✅ Done |
 | 03 | NAT | ✅ Done |
+| 04 | Segmentation and Policy | ✅ Done |
+| 05 | Service and Monitoring Lab | ✅ Done |
