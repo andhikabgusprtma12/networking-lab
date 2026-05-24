@@ -1,0 +1,309 @@
+! ============================================================
+! TOPOLOGY : Small Office Network
+! DATE     : 24 - 05 - 2026
+! TOOLS    : Cisco Packet Tracer
+! ============================================================
+
+! ============================================================
+! VLAN CONFIGURATION
+! ============================================================
+
+! VLAN to STAFF (SW1)
+vlan 10
+ name STAFF-1
+ ex
+vlan 20
+ name STAFF-2
+ ex
+vlan 80
+ name STAFF-8
+ ex
+
+! VLAN to MARKETING (SW2)
+vlan 90
+ name MARKETING-1
+ ex
+vlan 100
+ name MARKETING-2
+ ex
+vlan 160
+ name MARKETING-8
+ ex
+
+! VLAN to FINANCE (SW3)
+vlan 170
+ name FINANCE-1
+ ex
+vlan 180
+ name FINANCE-2
+ ex
+vlan 240
+ name FINANCE-8
+
+! VLAN to IT (SW4)
+vlan 250
+ name IT-1
+ ex
+vlan 260
+ name IT-2
+ ex
+vlan 280
+ name IT-3
+ ex
+
+! ============================================================
+! Subinterface CONFIGURATION
+! ============================================================
+
+! Subinterface to VLAN STAFF (SW1)
+int fa0/1
+ switchport mode access
+ switchport access vlan 10
+ ex
+int fa0/2
+ switchport mode access
+ switchport access vlan 20
+ ex
+int fa0/8
+ switchport mode access
+ switchport access vlan 80
+ ex
+
+! Subinterface to VLAN MARKETING (SW2)
+int fa0/1
+ switchport mode access
+ switchport access vlan 90
+ ex
+int fa0/2
+ switchport mode access
+ switchport access vlan 100
+ ex
+int fa0/8
+ switchport mode access
+ switchport access vlan 160
+ ex
+
+! Subinterface to VLAN FINANCE (SW3)
+int fa0/1
+ switchport mode access
+ switchport access vlan 170
+ ex
+int fa0/2
+ switchport mode access
+ switchport access vlan 180
+ ex
+int fa0/8
+ switchport mode access
+ switchport access vlan 240
+ ex
+
+! Subinterface to VLAN IT (SW4)
+int fa0/1
+ switchport mode access
+ switchport access vlan 250
+ ex
+int fa0/2
+ switchport mode access
+ switchport access vlan 260
+ ex
+int fa0/4
+ switchport mode access
+ switchport access vlan 280
+ ex
+
+! ============================================================
+! Trunk CONFIGURATION
+! ============================================================
+
+! SW1 to R1
+int fa0/9
+ switchport mode trunk
+ ex
+
+! SW2 to R1
+int fa0/9
+ switchport mode trunk
+ ex
+
+! SW3 to R1
+int fa0/9
+ switchport mode trunk
+ ex
+
+! SW4 to R1
+int fa0/5
+ switchport mode trunk
+ ex
+
+! ============================================================
+! DHCP CONFIGURATION
+! ============================================================
+
+! DHCP to STAFF (R1)
+ip dhcp excluded-address 192.168.1.1
+ ip dhcp pool STAFF-1
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ dns-server 203.0.113.2
+ ex
+
+! ============================================================
+! Routing CONFIGURATION
+! ============================================================
+
+! R1 to Server-ISP
+int fa4/0
+ ip add 203.0.113.1 255.255.255.0
+ no sh
+ ex
+
+! R1 to Server-SERVICES
+int fa5/0
+ ip add 172.16.0.1 255.255.255.0
+ no sh
+ ex
+
+! R1 to Server-ISP
+ip route 0.0.0.0 0.0.0.0 203.0.113.2
+
+! ============================================================
+! PAT CONFIGURATION
+! ============================================================
+
+! PAT to Server-ISP
+ip access-list standard PAT-LIST
+ permit 192.168.1.0 0.0.0.255
+ permit 192.168.2.0 0.0.0.255
+ permit 192.168.3.0 0.0.0.255
+ permit 192.168.28.0 0.0.0.255
+ ex
+
+ip nat inside source list PAT-LIST interface fa4/0 overload
+
+! PAT to Subinterface
+int fa0/0.10
+ ip nat inside
+ ex
+
+int fa1/0.90
+ ip nat inside
+ ex
+
+int fa3/0.250
+ ip nat inside
+ ex
+
+int fa4/0
+ ip nat outside
+ ex
+
+! ============================================================
+! DNS CONFIGURATION
+! ============================================================
+
+! Server-ISP to Server-SERVICES
+click server
+ services
+ DNS
+ Name : www.service.local
+ Type : A Record
+ Address : 172.16.0.2
+ add
+ save
+
+! ============================================================
+! WEB CONFIGURATION
+! ============================================================
+
+! Server-SERVICES
+click server
+ services
+ HTTP
+ edit index.html
+ save
+
+! ============================================================
+! SSH CONFIGURATION
+! ============================================================
+
+! R1
+hostname netlab
+ ip domain-name netlab.com
+ crypto key generate rsa
+ 1024
+ username admin secret admin#123
+ line vty 0 4
+ transport input ssh
+ login local
+ ip ssh version 2
+
+! ============================================================
+! ACL CONFIGURATION
+! ============================================================
+
+! ACL to STAFF
+ip access-list extended staff-policy
+ 10 permit icmp any any echo-reply
+ 20 deny ip 192.168.0.0 0.0.7.255 192.168.16.0 0.0.7.255
+ 30 deny ip 192.168.0.0 0.0.7.255 192.168.24.0 0.0.7.255
+ 40 permit ip any any
+ ex
+
+! ACL to MARKETING
+ip access-list extended marketing-policy
+ 10 permit icmp any any echo-reply
+ 20 deny ip 192.168.8.0 0.0.7.255 192.168.16.0 0.0.7.255
+ 30 deny ip 192.168.8.0 0.0.7.255 192.168.24.0 0.0.7.255
+ 40 permit ip any any
+ ex
+
+! ACL to FINANCE
+ip access-list extended finance-policy
+ 10 permit icmp any any echo-reply
+ 20 deny ip 192.168.16.0 0.0.7.255 192.168.0.0 0.0.7.255
+ 30 deny ip 192.168.16.0 0.0.7.255 192.168.8.0 0.0.7.255
+ 40 deny ip 192.168.16.0 0.0.7.255 192.168.24.0 0.0.7.255
+ 50 permit ip any any
+ ex
+
+! ACL to IT
+ip access-list extended it-policy
+ 10 permit ip any any
+ ex
+
+! ACL to Subinterface STAFF
+int fa0/0.10
+ ip access-group staff-policy in
+ ex
+
+int fa0/0.20
+ ip access-group staff-policy in
+ ex
+ 
+! ACL to Subinterface MARKETING
+int fa1/0.90
+ ip access-group marketing-policy in
+ ex
+
+int fa1/0.100
+ ip access-group marketing-policy in
+ ex
+
+! ACL to Subinterface FINANCE
+int fa2/0.170
+ ip access-group finance-policy in
+ ex
+
+int fa2/0.180
+ ip access-group finance-policy in
+ ex
+
+! ACL to Subinterface IT
+int fa3/0.250
+ ip access-group it-policy in
+ ex
+
+int fa3/0.260
+ ip access-group it-policy in
+ ex
+
