@@ -20,8 +20,8 @@ advanced configurations.
 - Linux (Basic)
 
 ## Structure
-- `progress/` - Step by step learning documentation
-- `projects/` - Main projects
+- `progres/` - Step by step learning documentation
+- `project/` - Main projects
 - `side-task/` - Additional skills
 
 ## Progress
@@ -32,3 +32,8 @@ advanced configurations.
 | 03 | NAT | ✅ Done |
 | 04 | Segmentation and Policy | ✅ Done |
 | 05 | Service and Monitoring Lab | ✅ Done |
+
+## Project
+| No | Topic | Status |
+|----|-------|--------|
+| 01 | Small Office Network | ✅ Done |
