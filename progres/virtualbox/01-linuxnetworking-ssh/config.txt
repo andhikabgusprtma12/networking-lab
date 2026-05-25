@@ -1,0 +1,42 @@
+! ============================================================
+! TOPOLOGY : SSH Remote Access via VirtualBox
+! DATE     : 25 - 05 - 2026
+! TOOLS    : VirtualBox, Ubuntu 26.04, Debian 13
+! ============================================================
+
+! ============================================================
+! Network CONFIGURATION
+! ============================================================
+
+! VirtualBox Network Setting
+ Adapter 1: Bridge Adapter
+
+! ============================================================
+! Debian Client - SSH CONFIGURATION
+! ============================================================
+
+! Install SSH Server
+ sudo apt update
+ sudo apt install openssh-server -y
+ sudo systemctl enable ssh
+ sudo systemctl start ssh
+
+! Check Status SSH
+ sudo systemctl status ssh
+
+! Check IP Debian
+ ip a
+
+! ============================================================
+! Ubuntu Host - SSH CONFIGURATION
+! ============================================================
+
+! Connect to Debian via SSH
+ ssh -l debianc 192.168.0.110
+ input pass
+ yes
+
+! Verify
+ sudo whoami
+ hostname
+ 
