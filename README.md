@@ -1,8 +1,8 @@
 # Network Lab
 
-A personal networking portfolio built using Cisco Packet Tracer.
-Documenting my learning journey from basic networking to more
-advanced configurations.
+A personal networking portfolio built using Cisco Packet Tracer
+and VirtualBox. Documenting my learning journey from basic 
+networking to more advanced configurations.
 
 ## Skills
 - Basic Network Configuration
@@ -14,10 +14,12 @@ advanced configurations.
 - DNS Server
 - SSH Server
 - Web Server
+- Network Virtualization (VirtualBox)
+- Linux Networking
 
 ## Tools
 - Cisco Packet Tracer
-- Linux (Basic)
+- VirtualBox
 
 ## Structure
 - `progres/` - Step by step learning documentation
@@ -32,6 +34,7 @@ advanced configurations.
 | 03 | NAT | ✅ Done |
 | 04 | Segmentation and Policy | ✅ Done |
 | 05 | Service and Monitoring Lab | ✅ Done |
+| 06 | Linux Network and SSH | ✅ Done |
 
 ## Project
 | No | Topic | Status |
