@@ -1,0 +1,44 @@
+! ============================================================
+! TOPOLOGY : Apache2 Web Server - VirtualBox
+! DATE     : 27 - 05 - 2026
+! TOOLS    : VirtualBox, Ubuntu 26.04, Debian 13
+! ============================================================
+
+! ============================================================
+! Debian - Apache2 Web Server CONFIGURATION
+! ============================================================
+
+! Install Apache2
+ sudo apt update
+ sudo apt install apache2 -y
+
+! Enable Apache2
+ sudo systemctl enable apache2
+
+! Start Apache2
+ sudo systemctl start apache2
+
+! Check Status Apache2
+ sudo systemctl status apache2
+
+! Check IP
+ ip a
+
+! ============================================================
+! Ubuntu Client - Access Web Server CONFIGURATION
+! ============================================================
+
+! Access via browser
+ http:// 192.168.0.110
+
+! Access via curl
+ curl http://192.168.0.110
+
+! ============================================================
+! Debian - Stop Web Server CONFIGURATION
+! ============================================================
+! Stop Apache2
+ sudo systemctl stop apache2
+
+! Check Status Apache2
+ sudo systemctl status apache2

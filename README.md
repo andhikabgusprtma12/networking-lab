@@ -13,7 +13,7 @@ networking to more advanced configurations.
 - ACL
 - DNS Server
 - SSH Server
-- Web Server
+- Web Server (Apache2)
 - Network Virtualization (VirtualBox)
 - Linux Networking
 
@@ -35,6 +35,7 @@ networking to more advanced configurations.
 | 04 | Segmentation and Policy | ✅ Done |
 | 05 | Service and Monitoring Lab | ✅ Done |
 | 06 | Linux Network and SSH | ✅ Done |
+| 07 | Linux Service and Troubleshooting | ✅ Done |
 
 ## Project
 | No | Topic | Status |
